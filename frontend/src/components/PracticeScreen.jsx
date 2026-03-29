@@ -169,9 +169,7 @@ export default function PracticeScreen() {
               <span style={{ color: '#900' }}>{feedback.message}</span>
             )}
           </>
-        ) : (
-          <span style={{ color: '#bbb' }}>[ correct / incorrect message appears here ]</span>
-        )}
+        ) : null}
       </div>
     </div>
   )
