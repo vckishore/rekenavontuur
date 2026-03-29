@@ -113,11 +113,13 @@ async def _run_codex(topic: str, grade: int, count: int = 20) -> list:
         raise RuntimeError("Codex binary not found on PATH")
 
     prompt = (
-        f"Generate {count} math word problems for grade {grade}, topic: {topic}. "
-        "Return ONLY a valid JSON array. No explanation. No markdown. No code blocks. "
-        "Each object must have exactly: story (string or null), question (string), "
+        f"Genereer {count} wiskundige woordproblemen voor het {grade}e leerjaar, "
+        f"onderwerp: {topic}. "
+        "Schrijf alle teksten in verzorgd Belgisch-Nederlands (Vlaams). "
+        "Geef ALLEEN een geldig JSON-array terug. Geen uitleg. Geen markdown. Geen codeblokken. "
+        "Elk object heeft precies: story (string of null), question (string), "
         "answer (integer), hint (string). "
-        f'Example: [{{"story": null, "question": "3 x 8 = ?", "answer": 24, "hint": "Count 3 groups of 8"}}]'
+        f'Voorbeeld: [{{"story": null, "question": "3 x 8 = ?", "answer": 24, "hint": "Tel 3 groepen van 8"}}]'
     )
 
     proc = await asyncio.create_subprocess_exec(
