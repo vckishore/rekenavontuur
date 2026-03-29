@@ -1,0 +1,110 @@
+[
+  {
+    "id": "fallback-wp-g3-001",
+    "topic": "word-problems",
+    "grade": 3,
+    "story": "You are a merchant at the market.",
+    "question": "You sell 5 apples for 3 coins each. How many coins do you earn in total?",
+    "answer": 15,
+    "hint": "Multiply the number of apples by the price per apple: 5 x 3"
+  },
+  {
+    "id": "fallback-wp-g3-002",
+    "topic": "word-problems",
+    "grade": 3,
+    "story": null,
+    "question": "Sam has 14 marbles. He gives 6 to his friend and finds 3 more on the ground. How many marbles does Sam have now?",
+    "answer": 11,
+    "hint": "Start with 14, subtract 6 (gave away), then add 3 (found): 14 - 6 + 3"
+  },
+  {
+    "id": "fallback-wp-g3-003",
+    "topic": "word-problems",
+    "grade": 3,
+    "story": "A school trip is being planned.",
+    "question": "There are 3 classes of 28 students each going on a trip. The bus holds 30 students. How many buses are needed?",
+    "answer": 3,
+    "hint": "Total students: 3 x 28 = 84. Each bus holds 30. 84 ÷ 30 = 2 remainder 24, so you need 3 buses"
+  },
+  {
+    "id": "fallback-wp-g3-004",
+    "topic": "word-problems",
+    "grade": 3,
+    "story": null,
+    "question": "A bookshelf has 4 rows with 9 books each. You add 8 more books. How many books are on the shelf now?",
+    "answer": 44,
+    "hint": "First find the original count: 4 x 9 = 36. Then add 8: 36 + 8 = 44"
+  },
+  {
+    "id": "fallback-wp-g3-005",
+    "topic": "word-problems",
+    "grade": 3,
+    "story": "You are running a lemonade stand.",
+    "question": "You made 48 cups of lemonade and sold 35 by noon. How many cups are left to sell?",
+    "answer": 13,
+    "hint": "Subtract the cups sold from the total made: 48 - 35"
+  },
+  {
+    "id": "fallback-wp-g3-006",
+    "topic": "word-problems",
+    "grade": 3,
+    "story": null,
+    "question": "A train has 6 carriages with 12 seats each. 50 passengers are on board. How many seats are empty?",
+    "answer": 22,
+    "hint": "Total seats: 6 x 12 = 72. Empty seats: 72 - 50 = 22"
+  },
+  {
+    "id": "fallback-wp-g3-007",
+    "topic": "word-problems",
+    "grade": 3,
+    "story": "You are helping at a bake sale.",
+    "question": "You baked 3 batches of 12 muffins. You ate 2. How many muffins are left to sell?",
+    "answer": 34,
+    "hint": "Total muffins: 3 x 12 = 36. Subtract the 2 you ate: 36 - 2 = 34"
+  },
+  {
+    "id": "fallback-wp-g3-008",
+    "topic": "word-problems",
+    "grade": 3,
+    "story": null,
+    "question": "There are 7 tables in the classroom with 4 chairs each. 6 students are absent today. How many students are present if every chair that could be filled is filled?",
+    "answer": 22,
+    "hint": "Total chairs: 7 x 4 = 28. Subtract absent students: 28 - 6 = 22"
+  },
+  {
+    "id": "fallback-wp-g3-009",
+    "topic": "word-problems",
+    "grade": 3,
+    "story": "A garden needs watering.",
+    "question": "A watering can holds 9 litres. You need 45 litres to water all the plants. How many full cans do you need?",
+    "answer": 5,
+    "hint": "Divide total litres needed by litres per can: 45 ÷ 9 = 5"
+  },
+  {
+    "id": "fallback-wp-g3-010",
+    "topic": "word-problems",
+    "grade": 3,
+    "story": null,
+    "question": "A store has 60 pencils. They pack them into boxes of 12. How many boxes can they fill?",
+    "answer": 5,
+    "hint": "Divide the total pencils by the box size: 60 ÷ 12 = 5"
+  },
+  {
+    "id": "fallback-wp-g3-011",
+    "topic": "word-problems",
+    "grade": 3,
+    "story": "You are collecting stamps.",
+    "question": "You have 25 stamps in your album. Your friend gives you 13 more and you use 8 to send letters. How many stamps do you have now?",
+    "answer": 30,
+    "hint": "Start with 25, add 13 (received), subtract 8 (used): 25 + 13 - 8 = 30"
+  },
+  {
+    "id": "fallback-wp-g3-012",
+    "topic": "word-problems",
+    "grade": 3,
+    "story": null,
+    "question": "A rope is 56 cm long. It is cut into 8 equal pieces. How long is each piece?",
+    "answer": 7,
+    "hint": "Divide the total length by the number of pieces: 56 ÷ 8 = 7"
+  }
+]

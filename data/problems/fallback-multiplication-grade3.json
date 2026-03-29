@@ -1,0 +1,137 @@
+[
+  {
+    "id": "fallback-mult-g3-001",
+    "topic": "multiplication",
+    "grade": 3,
+    "story": "You are a baker in the kingdom of Numeria.",
+    "question": "If each tray holds 8 cookies and you have 3 trays, how many cookies total?",
+    "answer": 24,
+    "hint": "Multiply the number of trays by cookies per tray: 3 x 8"
+  },
+  {
+    "id": "fallback-mult-g3-002",
+    "topic": "multiplication",
+    "grade": 3,
+    "story": null,
+    "question": "What is 4 x 7?",
+    "answer": 28,
+    "hint": "Count 4 groups of 7, or use 4 x 7 = 4 x 5 + 4 x 2"
+  },
+  {
+    "id": "fallback-mult-g3-003",
+    "topic": "multiplication",
+    "grade": 3,
+    "story": "A farmer plants rows of seeds.",
+    "question": "If there are 6 rows with 9 seeds each, how many seeds are there in total?",
+    "answer": 54,
+    "hint": "6 rows times 9 seeds per row: 6 x 9"
+  },
+  {
+    "id": "fallback-mult-g3-004",
+    "topic": "multiplication",
+    "grade": 3,
+    "story": null,
+    "question": "What is 5 x 8?",
+    "answer": 40,
+    "hint": "Multiply by 5: the answer always ends in 0 or 5. 5 x 8 = 40"
+  },
+  {
+    "id": "fallback-mult-g3-005",
+    "topic": "multiplication",
+    "grade": 3,
+    "story": "You are packing gift boxes for a party.",
+    "question": "If you need 7 boxes with 6 gifts each, how many gifts do you need?",
+    "answer": 42,
+    "hint": "7 groups of 6: 7 x 6"
+  },
+  {
+    "id": "fallback-mult-g3-006",
+    "topic": "multiplication",
+    "grade": 3,
+    "story": null,
+    "question": "What is 9 x 3?",
+    "answer": 27,
+    "hint": "9 x 3: think of it as 10 x 3 minus 3, which is 30 - 3 = 27"
+  },
+  {
+    "id": "fallback-mult-g3-007",
+    "topic": "multiplication",
+    "grade": 3,
+    "story": "A library has several shelves of books.",
+    "question": "If each of the 4 shelves holds 8 books, how many books are there?",
+    "answer": 32,
+    "hint": "4 shelves x 8 books each: 4 x 8"
+  },
+  {
+    "id": "fallback-mult-g3-008",
+    "topic": "multiplication",
+    "grade": 3,
+    "story": null,
+    "question": "What is 6 x 6?",
+    "answer": 36,
+    "hint": "6 squared: 6 x 6 = 36. Think of a 6-by-6 grid"
+  },
+  {
+    "id": "fallback-mult-g3-009",
+    "topic": "multiplication",
+    "grade": 3,
+    "story": "A market stall sells bags of oranges.",
+    "question": "If 5 bags each have 9 oranges, how many oranges are there in total?",
+    "answer": 45,
+    "hint": "5 x 9: think of 5 x 10 minus 5, which is 50 - 5 = 45"
+  },
+  {
+    "id": "fallback-mult-g3-010",
+    "topic": "multiplication",
+    "grade": 3,
+    "story": null,
+    "question": "What is 3 x 3?",
+    "answer": 9,
+    "hint": "3 groups of 3: 3 + 3 + 3 = 9"
+  },
+  {
+    "id": "fallback-mult-g3-011",
+    "topic": "multiplication",
+    "grade": 3,
+    "story": "You are collecting trading cards.",
+    "question": "If you have 7 packs with 4 cards each, how many cards do you have?",
+    "answer": 28,
+    "hint": "7 packs times 4 cards: 7 x 4"
+  },
+  {
+    "id": "fallback-mult-g3-012",
+    "topic": "multiplication",
+    "grade": 3,
+    "story": null,
+    "question": "What is 8 x 8?",
+    "answer": 64,
+    "hint": "8 x 8 = 64. One way to remember: 5, 6, 7, 8 — 56 = 7 x 8, so 8 x 8 is one more step up"
+  },
+  {
+    "id": "fallback-mult-g3-013",
+    "topic": "multiplication",
+    "grade": 3,
+    "story": "A team of explorers sets up camp.",
+    "question": "If 3 explorers each carry 9 items, how many items are there in total?",
+    "answer": 27,
+    "hint": "3 x 9: think of 3 x 10 minus 3, which is 30 - 3 = 27"
+  },
+  {
+    "id": "fallback-mult-g3-014",
+    "topic": "multiplication",
+    "grade": 3,
+    "story": null,
+    "question": "What is 2 x 12?",
+    "answer": 24,
+    "hint": "2 x 12 = 2 x 10 + 2 x 2 = 20 + 4 = 24"
+  },
+  {
+    "id": "fallback-mult-g3-015",
+    "topic": "multiplication",
+    "grade": 3,
+    "story": "A school is setting up desks for a test.",
+    "question": "If there are 5 rows with 7 desks each, how many desks are there?",
+    "answer": 35,
+    "hint": "5 rows times 7 desks: 5 x 7 = 35"
+  }
+]
