@@ -82,7 +82,7 @@ async def submit_answer(req: SubmitAnswerRequest):
     except (ValueError, AttributeError):
         return SubmitAnswerResponse(
             correct=False,
-            error="Please enter a whole number",
+            error="Voer een heel getal in",
         )
 
     problems = codex_pipeline.load_problems(req.topic, req.grade)
