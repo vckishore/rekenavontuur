@@ -165,9 +165,6 @@ export default function PracticeScreen() {
                 Hint: {feedback.hint}
               </span>
             )}
-            {feedback.type === 'error' && (
-              <span style={{ color: '#900' }}>{feedback.message}</span>
-            )}
           </>
         ) : null}
       </div>
