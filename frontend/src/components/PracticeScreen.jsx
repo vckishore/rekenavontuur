@@ -218,7 +218,6 @@ const styles = {
     width: '120px',
     fontFamily: 'monospace',
     background: '#fff',
-    outline: 'none',
   },
   btn: {
     border: '2px solid #333',
