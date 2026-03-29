@@ -237,7 +237,8 @@ const styles = {
     border: '1px dashed #bbb',
     padding: '10px',
     fontFamily: 'monospace',
-    fontSize: '12px',
-    minHeight: '36px',
+    fontSize: '14px',
+    lineHeight: 1.5,
+    minHeight: '44px',
   },
 }
