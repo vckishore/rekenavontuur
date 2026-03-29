@@ -144,6 +144,7 @@ export default function PracticeScreen() {
           style={styles.input}
           type="text"
           inputMode="numeric"
+          autoComplete="off"
           placeholder="?"
           value={answer}
           onChange={e => setAnswer(e.target.value)}
