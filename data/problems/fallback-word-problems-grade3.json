@@ -1,110 +1,110 @@
 [
   {
     "id": "fallback-wp-g3-001",
-    "topic": "word-problems",
+    "topic": "vraagstukken",
     "grade": 3,
-    "story": "You are a merchant at the market.",
-    "question": "You sell 5 apples for 3 coins each. How many coins do you earn in total?",
+    "story": "Je bent koopman op de markt.",
+    "question": "Je verkoopt 5 appels aan 3 munten elk. Hoeveel munten verdien je in totaal?",
     "answer": 15,
-    "hint": "Multiply the number of apples by the price per apple: 5 x 3"
+    "hint": "Vermenigvuldig het aantal appels met de prijs per appel: 5 x 3"
   },
   {
     "id": "fallback-wp-g3-002",
-    "topic": "word-problems",
+    "topic": "vraagstukken",
     "grade": 3,
     "story": null,
-    "question": "Sam has 14 marbles. He gives 6 to his friend and finds 3 more on the ground. How many marbles does Sam have now?",
+    "question": "Sam heeft 14 knikkers. Hij geeft er 6 aan zijn vriend en vindt er nog 3 op de grond. Hoeveel knikkers heeft Sam nu?",
     "answer": 11,
-    "hint": "Start with 14, subtract 6 (gave away), then add 3 (found): 14 - 6 + 3"
+    "hint": "Begin met 14, trek 6 af (gegeven), tel er 3 bij op (gevonden): 14 - 6 + 3"
   },
   {
     "id": "fallback-wp-g3-003",
-    "topic": "word-problems",
+    "topic": "vraagstukken",
     "grade": 3,
-    "story": "A school trip is being planned.",
-    "question": "There are 3 classes of 28 students each going on a trip. The bus holds 30 students. How many buses are needed?",
+    "story": "Er wordt een schooluitstap gepland.",
+    "question": "Er gaan 3 klassen van elk 28 leerlingen op uitstap. Een bus heeft plaats voor 30 leerlingen. Hoeveel bussen zijn er nodig?",
     "answer": 3,
-    "hint": "Total students: 3 x 28 = 84. Each bus holds 30. 84 ÷ 30 = 2 remainder 24, so you need 3 buses"
+    "hint": "Totaal leerlingen: 3 x 28 = 84. Elke bus heeft 30 plaatsen. 84 ÷ 30 = 2 rest 24, dus je hebt 3 bussen nodig"
   },
   {
     "id": "fallback-wp-g3-004",
-    "topic": "word-problems",
+    "topic": "vraagstukken",
     "grade": 3,
     "story": null,
-    "question": "A bookshelf has 4 rows with 9 books each. You add 8 more books. How many books are on the shelf now?",
+    "question": "Een boekenrek heeft 4 rijen met elk 9 boeken. Je zet er nog 8 boeken bij. Hoeveel boeken staan er nu op het rek?",
     "answer": 44,
-    "hint": "First find the original count: 4 x 9 = 36. Then add 8: 36 + 8 = 44"
+    "hint": "Bereken eerst het originele aantal: 4 x 9 = 36. Tel er dan 8 bij op: 36 + 8 = 44"
   },
   {
     "id": "fallback-wp-g3-005",
-    "topic": "word-problems",
+    "topic": "vraagstukken",
     "grade": 3,
-    "story": "You are running a lemonade stand.",
-    "question": "You made 48 cups of lemonade and sold 35 by noon. How many cups are left to sell?",
+    "story": "Je hebt een limonadekraampje.",
+    "question": "Je hebt 48 bekers limonade gemaakt en 's middags 35 verkocht. Hoeveel bekers zijn er nog over?",
     "answer": 13,
-    "hint": "Subtract the cups sold from the total made: 48 - 35"
+    "hint": "Trek de verkochte bekers af van het totaal: 48 - 35"
   },
   {
     "id": "fallback-wp-g3-006",
-    "topic": "word-problems",
+    "topic": "vraagstukken",
     "grade": 3,
     "story": null,
-    "question": "A train has 6 carriages with 12 seats each. 50 passengers are on board. How many seats are empty?",
+    "question": "Een trein heeft 6 rijtuigen met elk 12 zitplaatsen. Er zitten 50 reizigers aan boord. Hoeveel plaatsen zijn er vrij?",
     "answer": 22,
-    "hint": "Total seats: 6 x 12 = 72. Empty seats: 72 - 50 = 22"
+    "hint": "Totaal zitplaatsen: 6 x 12 = 72. Vrije plaatsen: 72 - 50 = 22"
   },
   {
     "id": "fallback-wp-g3-007",
-    "topic": "word-problems",
+    "topic": "vraagstukken",
     "grade": 3,
-    "story": "You are helping at a bake sale.",
-    "question": "You baked 3 batches of 12 muffins. You ate 2. How many muffins are left to sell?",
+    "story": "Je helpt mee op een boekenmarkt.",
+    "question": "Je hebt 3 bakken met elk 12 muffins gebakken. Je eet er zelf 2 op. Hoeveel muffins zijn er nog te koop?",
     "answer": 34,
-    "hint": "Total muffins: 3 x 12 = 36. Subtract the 2 you ate: 36 - 2 = 34"
+    "hint": "Totaal muffins: 3 x 12 = 36. Trek de 2 die je opgegeten hebt af: 36 - 2 = 34"
   },
   {
     "id": "fallback-wp-g3-008",
-    "topic": "word-problems",
+    "topic": "vraagstukken",
     "grade": 3,
     "story": null,
-    "question": "There are 7 tables in the classroom with 4 chairs each. 6 students are absent today. How many students are present if every chair that could be filled is filled?",
+    "question": "Er staan 7 tafels in de klas met elk 4 stoelen. Vandaag zijn 6 leerlingen afwezig. Hoeveel leerlingen zijn er aanwezig als elke mogelijke stoel bezet is?",
     "answer": 22,
-    "hint": "Total chairs: 7 x 4 = 28. Subtract absent students: 28 - 6 = 22"
+    "hint": "Totaal stoelen: 7 x 4 = 28. Trek de afwezigen af: 28 - 6 = 22"
   },
   {
     "id": "fallback-wp-g3-009",
-    "topic": "word-problems",
+    "topic": "vraagstukken",
     "grade": 3,
-    "story": "A garden needs watering.",
-    "question": "A watering can holds 9 litres. You need 45 litres to water all the plants. How many full cans do you need?",
+    "story": "De tuin moet water krijgen.",
+    "question": "Een gieter bevat 9 liter. Je hebt 45 liter nodig om alle planten water te geven. Hoeveel volle gieters heb je nodig?",
     "answer": 5,
-    "hint": "Divide total litres needed by litres per can: 45 ÷ 9 = 5"
+    "hint": "Deel het totaal benodigde aantal liters door de inhoud van de gieter: 45 ÷ 9 = 5"
   },
   {
     "id": "fallback-wp-g3-010",
-    "topic": "word-problems",
+    "topic": "vraagstukken",
     "grade": 3,
     "story": null,
-    "question": "A store has 60 pencils. They pack them into boxes of 12. How many boxes can they fill?",
+    "question": "Een winkel heeft 60 potloden. Ze worden verpakt in dozen van 12. Hoeveel dozen kunnen ze volledig vullen?",
     "answer": 5,
-    "hint": "Divide the total pencils by the box size: 60 ÷ 12 = 5"
+    "hint": "Deel het totaal aantal potloden door de dozen: 60 ÷ 12 = 5"
   },
   {
     "id": "fallback-wp-g3-011",
-    "topic": "word-problems",
+    "topic": "vraagstukken",
     "grade": 3,
-    "story": "You are collecting stamps.",
-    "question": "You have 25 stamps in your album. Your friend gives you 13 more and you use 8 to send letters. How many stamps do you have now?",
+    "story": "Je verzamelt postzegels.",
+    "question": "Je hebt 25 postzegels in je album. Een vriend geeft je er nog 13 en je gebruikt er 8 voor brieven. Hoeveel postzegels heb je nu?",
     "answer": 30,
-    "hint": "Start with 25, add 13 (received), subtract 8 (used): 25 + 13 - 8 = 30"
+    "hint": "Begin met 25, tel 13 op (gekregen), trek 8 af (gebruikt): 25 + 13 - 8 = 30"
   },
   {
     "id": "fallback-wp-g3-012",
-    "topic": "word-problems",
+    "topic": "vraagstukken",
     "grade": 3,
     "story": null,
-    "question": "A rope is 56 cm long. It is cut into 8 equal pieces. How long is each piece?",
+    "question": "Een touw is 56 cm lang. Het wordt in 8 gelijke stukken gesneden. Hoe lang is elk stuk?",
     "answer": 7,
-    "hint": "Divide the total length by the number of pieces: 56 ÷ 8 = 7"
+    "hint": "Deel de totale lengte door het aantal stukken: 56 ÷ 8 = 7"
   }
 ]

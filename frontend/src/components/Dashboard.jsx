@@ -10,38 +10,38 @@ export default function Dashboard() {
     fetch('/api/dashboard')
       .then(r => r.json())
       .then(setData)
-      .catch(() => setError('Could not load dashboard.'))
+      .catch(() => setError('Kon het dashboard niet laden.'))
   }, [])
 
   if (error) return <div style={styles.screen}><p style={{ color: '#c00' }}>{error}</p></div>
-  if (!data) return <div style={styles.screen}>Loading...</div>
+  if (!data) return <div style={styles.screen}>Laden...</div>
 
   return (
     <div style={styles.screen}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-        <h1 style={styles.h1}>Parent Dashboard</h1>
-        <button style={styles.btn} onClick={() => navigate('/')}>← Practice</button>
+        <h1 style={styles.h1}>Overzicht voor ouders</h1>
+        <button style={styles.btn} onClick={() => navigate('/')}>← Oefenen</button>
       </div>
 
       <div style={styles.statRow}>
-        <StatBox number={data.total_problems} label="problems solved" />
-        <StatBox number={`${data.correct_rate}%`} label="correct rate" />
-        <StatBox number={data.total_sessions} label="sessions" />
+        <StatBox number={data.total_problems} label="opgaven gemaakt" />
+        <StatBox number={`${data.correct_rate}%`} label="correct" />
+        <StatBox number={data.total_sessions} label="sessies" />
       </div>
 
       {data.by_topic.length === 0 ? (
         <p style={{ fontFamily: 'monospace', fontSize: '13px', color: '#888' }}>
-          No sessions yet. Play a round to see stats here.
+          Nog geen sessies. Maak een oefenronde om hier statistieken te zien.
         </p>
       ) : (
         <>
-          <div style={styles.label}>by topic</div>
+          <div style={styles.label}>per onderwerp</div>
           <table style={styles.table}>
             <thead>
               <tr>
-                <th style={styles.th}>Topic</th>
-                <th style={styles.th}>Attempted</th>
-                <th style={styles.th}>Accuracy</th>
+                <th style={styles.th}>Onderwerp</th>
+                <th style={styles.th}>Geprobeerd</th>
+                <th style={styles.th}>Correct</th>
                 <th style={styles.th}></th>
               </tr>
             </thead>
@@ -65,12 +65,12 @@ export default function Dashboard() {
 
       {data.low_pool_warning && (
         <p style={{ fontFamily: 'monospace', fontSize: '11px', color: '#a60', marginBottom: '12px' }}>
-          Warning: problem pool is running low. Codex will regenerate automatically.
+          Opgelet: de opgavenbank is bijna leeg. Codex genereert automatisch nieuwe opgaven.
         </p>
       )}
 
       <div style={{ display: 'flex', gap: '8px' }}>
-        <a href="/api/export/csv" download style={styles.btnPrimary}>Export CSV</a>
+        <a href="/api/export/csv" download style={styles.btnPrimary}>Exporteer CSV</a>
       </div>
     </div>
   )

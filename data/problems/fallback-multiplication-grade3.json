@@ -1,137 +1,137 @@
 [
   {
     "id": "fallback-mult-g3-001",
-    "topic": "multiplication",
+    "topic": "vermenigvuldigen",
     "grade": 3,
-    "story": "You are a baker in the kingdom of Numeria.",
-    "question": "If each tray holds 8 cookies and you have 3 trays, how many cookies total?",
+    "story": "Je bent bakker in het koninkrijk Numeria.",
+    "question": "Als elke bakplaat 8 koekjes heeft en je hebt 3 bakplaten, hoeveel koekjes heb je dan in totaal?",
     "answer": 24,
-    "hint": "Multiply the number of trays by cookies per tray: 3 x 8"
+    "hint": "Vermenigvuldig het aantal bakplaten met de koekjes per bakplaat: 3 x 8"
   },
   {
     "id": "fallback-mult-g3-002",
-    "topic": "multiplication",
+    "topic": "vermenigvuldigen",
     "grade": 3,
     "story": null,
-    "question": "What is 4 x 7?",
+    "question": "Hoeveel is 4 x 7?",
     "answer": 28,
-    "hint": "Count 4 groups of 7, or use 4 x 7 = 4 x 5 + 4 x 2"
+    "hint": "Tel 4 groepen van 7, of gebruik 4 x 7 = 4 x 5 + 4 x 2"
   },
   {
     "id": "fallback-mult-g3-003",
-    "topic": "multiplication",
+    "topic": "vermenigvuldigen",
     "grade": 3,
-    "story": "A farmer plants rows of seeds.",
-    "question": "If there are 6 rows with 9 seeds each, how many seeds are there in total?",
+    "story": "Een boer plant rijen zaadjes in zijn veld.",
+    "question": "Als er 6 rijen zijn met elk 9 zaadjes, hoeveel zaadjes zijn er dan in totaal?",
     "answer": 54,
-    "hint": "6 rows times 9 seeds per row: 6 x 9"
+    "hint": "6 rijen maal 9 zaadjes per rij: 6 x 9"
   },
   {
     "id": "fallback-mult-g3-004",
-    "topic": "multiplication",
+    "topic": "vermenigvuldigen",
     "grade": 3,
     "story": null,
-    "question": "What is 5 x 8?",
+    "question": "Hoeveel is 5 x 8?",
     "answer": 40,
-    "hint": "Multiply by 5: the answer always ends in 0 or 5. 5 x 8 = 40"
+    "hint": "Vermenigvuldig met 5: het antwoord eindigt altijd op 0 of 5. 5 x 8 = 40"
   },
   {
     "id": "fallback-mult-g3-005",
-    "topic": "multiplication",
+    "topic": "vermenigvuldigen",
     "grade": 3,
-    "story": "You are packing gift boxes for a party.",
-    "question": "If you need 7 boxes with 6 gifts each, how many gifts do you need?",
+    "story": "Je pakt geschenkdozen in voor een feestje.",
+    "question": "Als je 7 dozen nodig hebt met elk 6 cadeautjes, hoeveel cadeautjes heb je dan nodig?",
     "answer": 42,
-    "hint": "7 groups of 6: 7 x 6"
+    "hint": "7 groepen van 6: 7 x 6"
   },
   {
     "id": "fallback-mult-g3-006",
-    "topic": "multiplication",
+    "topic": "vermenigvuldigen",
     "grade": 3,
     "story": null,
-    "question": "What is 9 x 3?",
+    "question": "Hoeveel is 9 x 3?",
     "answer": 27,
-    "hint": "9 x 3: think of it as 10 x 3 minus 3, which is 30 - 3 = 27"
+    "hint": "9 x 3: denk aan 10 x 3 min 3, dat is 30 - 3 = 27"
   },
   {
     "id": "fallback-mult-g3-007",
-    "topic": "multiplication",
+    "topic": "vermenigvuldigen",
     "grade": 3,
-    "story": "A library has several shelves of books.",
-    "question": "If each of the 4 shelves holds 8 books, how many books are there?",
+    "story": "Een bibliotheek heeft meerdere rekken vol boeken.",
+    "question": "Als elk van de 4 rekken 8 boeken heeft, hoeveel boeken zijn er dan?",
     "answer": 32,
-    "hint": "4 shelves x 8 books each: 4 x 8"
+    "hint": "4 rekken x 8 boeken per rek: 4 x 8"
   },
   {
     "id": "fallback-mult-g3-008",
-    "topic": "multiplication",
+    "topic": "vermenigvuldigen",
     "grade": 3,
     "story": null,
-    "question": "What is 6 x 6?",
+    "question": "Hoeveel is 6 x 6?",
     "answer": 36,
-    "hint": "6 squared: 6 x 6 = 36. Think of a 6-by-6 grid"
+    "hint": "6 kwadraat: 6 x 6 = 36. Denk aan een rooster van 6 bij 6"
   },
   {
     "id": "fallback-mult-g3-009",
-    "topic": "multiplication",
+    "topic": "vermenigvuldigen",
     "grade": 3,
-    "story": "A market stall sells bags of oranges.",
-    "question": "If 5 bags each have 9 oranges, how many oranges are there in total?",
+    "story": "Een marktkoopman verkoopt zakken sinaasappelen.",
+    "question": "Als 5 zakken elk 9 sinaasappelen bevatten, hoeveel sinaasappelen zijn er dan in totaal?",
     "answer": 45,
-    "hint": "5 x 9: think of 5 x 10 minus 5, which is 50 - 5 = 45"
+    "hint": "5 x 9: denk aan 5 x 10 min 5, dat is 50 - 5 = 45"
   },
   {
     "id": "fallback-mult-g3-010",
-    "topic": "multiplication",
+    "topic": "vermenigvuldigen",
     "grade": 3,
     "story": null,
-    "question": "What is 3 x 3?",
+    "question": "Hoeveel is 3 x 3?",
     "answer": 9,
-    "hint": "3 groups of 3: 3 + 3 + 3 = 9"
+    "hint": "3 groepen van 3: 3 + 3 + 3 = 9"
   },
   {
     "id": "fallback-mult-g3-011",
-    "topic": "multiplication",
+    "topic": "vermenigvuldigen",
     "grade": 3,
-    "story": "You are collecting trading cards.",
-    "question": "If you have 7 packs with 4 cards each, how many cards do you have?",
+    "story": "Je verzamelt speelkaarten.",
+    "question": "Als je 7 pakjes hebt met elk 4 kaarten, hoeveel kaarten heb je dan?",
     "answer": 28,
-    "hint": "7 packs times 4 cards: 7 x 4"
+    "hint": "7 pakjes maal 4 kaarten: 7 x 4"
   },
   {
     "id": "fallback-mult-g3-012",
-    "topic": "multiplication",
+    "topic": "vermenigvuldigen",
     "grade": 3,
     "story": null,
-    "question": "What is 8 x 8?",
+    "question": "Hoeveel is 8 x 8?",
     "answer": 64,
-    "hint": "8 x 8 = 64. One way to remember: 5, 6, 7, 8 — 56 = 7 x 8, so 8 x 8 is one more step up"
+    "hint": "8 x 8 = 64. Een ezelsbruggetje: 5, 6, 7, 8 — 56 = 7 x 8, dus 8 x 8 is één stap verder"
   },
   {
     "id": "fallback-mult-g3-013",
-    "topic": "multiplication",
+    "topic": "vermenigvuldigen",
     "grade": 3,
-    "story": "A team of explorers sets up camp.",
-    "question": "If 3 explorers each carry 9 items, how many items are there in total?",
+    "story": "Een groep ontdekkingsreizigers slaat kamp op.",
+    "question": "Als 3 reizigers elk 9 spullen dragen, hoeveel spullen zijn er dan in totaal?",
     "answer": 27,
-    "hint": "3 x 9: think of 3 x 10 minus 3, which is 30 - 3 = 27"
+    "hint": "3 x 9: denk aan 3 x 10 min 3, dat is 30 - 3 = 27"
   },
   {
     "id": "fallback-mult-g3-014",
-    "topic": "multiplication",
+    "topic": "vermenigvuldigen",
     "grade": 3,
     "story": null,
-    "question": "What is 2 x 12?",
+    "question": "Hoeveel is 2 x 12?",
     "answer": 24,
     "hint": "2 x 12 = 2 x 10 + 2 x 2 = 20 + 4 = 24"
   },
   {
     "id": "fallback-mult-g3-015",
-    "topic": "multiplication",
+    "topic": "vermenigvuldigen",
     "grade": 3,
-    "story": "A school is setting up desks for a test.",
-    "question": "If there are 5 rows with 7 desks each, how many desks are there?",
+    "story": "Een school zet banken klaar voor een toets.",
+    "question": "Als er 5 rijen zijn met elk 7 banken, hoeveel banken zijn er dan?",
     "answer": 35,
-    "hint": "5 rows times 7 desks: 5 x 7 = 35"
+    "hint": "5 rijen maal 7 banken: 5 x 7 = 35"
   }
 ]

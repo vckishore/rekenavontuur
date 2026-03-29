@@ -2,7 +2,7 @@ export default function ProgressDots({ total = 5, completed = 0 }) {
   return (
     <div style={{ display: 'flex', gap: '6px', alignItems: 'center', marginBottom: '16px' }}>
       <span style={{ fontFamily: 'monospace', fontSize: '11px', color: '#888' }}>
-        progress:
+        voortgang:
       </span>
       {Array.from({ length: total }, (_, i) => (
         <span

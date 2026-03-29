@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import StoryBanner from './StoryBanner.jsx'
 import ProgressDots from './ProgressDots.jsx'
 
-const TOPIC = 'multiplication'
+const TOPIC = 'vermenigvuldigen'
 const GRADE = 3
 
 export default function PracticeScreen() {
@@ -34,7 +34,7 @@ export default function PracticeScreen() {
       })
       if (!res.ok) {
         const data = await res.json()
-        setError(data.detail || 'Could not load problems. Try again later.')
+        setError(data.detail || 'Kon de opgaven niet laden. Probeer het later opnieuw.')
         return
       }
       const data = await res.json()
@@ -47,7 +47,7 @@ export default function PracticeScreen() {
       setAnswer('')
       attemptRef.current = 1
     } catch {
-      setError('Could not connect to server.')
+      setError('Kon geen verbinding maken met de server.')
     } finally {
       setLoading(false)
     }
@@ -79,7 +79,7 @@ export default function PracticeScreen() {
     if (data.correct) {
       const next = completed + 1
       setCompleted(next)
-      setFeedback({ type: 'correct', message: 'Correct!' })
+      setFeedback({ type: 'correct', message: 'Juist!' })
       attemptRef.current = 1
       if (next >= problems.length) {
         setTimeout(() => setDone(true), 800)
@@ -92,7 +92,7 @@ export default function PracticeScreen() {
       }
     } else {
       attemptRef.current += 1
-      setFeedback({ type: 'wrong', message: 'Not quite.', hint: data.hint })
+      setFeedback({ type: 'wrong', message: 'Niet helemaal.', hint: data.hint })
     }
   }
 
@@ -105,20 +105,20 @@ export default function PracticeScreen() {
     }
   }
 
-  if (loading) return <div style={styles.center}>Loading problems...</div>
+  if (loading) return <div style={styles.center}>Opgaven laden...</div>
   if (error) return (
     <div style={styles.center}>
       <p style={{ color: '#c00', marginBottom: '12px' }}>{error}</p>
-      <button style={styles.btn} onClick={startSession}>Try Again</button>
+      <button style={styles.btn} onClick={startSession}>Opnieuw proberen</button>
     </div>
   )
   if (done) return (
     <div style={styles.center}>
-      <h2 style={{ fontFamily: 'monospace', marginBottom: '16px' }}>Session complete!</h2>
+      <h2 style={{ fontFamily: 'monospace', marginBottom: '16px' }}>Oefensessie voltooid!</h2>
       <div style={{ display: 'flex', gap: '8px' }}>
-        <button style={styles.btnPrimary} onClick={startSession}>Play again</button>
+        <button style={styles.btnPrimary} onClick={startSession}>Nog een keer</button>
         <button style={styles.btn} onClick={() => navigate('/dashboard')}>
-          View dashboard
+          Bekijk resultaten
         </button>
       </div>
     </div>
@@ -134,7 +134,7 @@ export default function PracticeScreen() {
 
       <div style={styles.problemBox}>
         <span style={styles.problemTag}>
-          [ {problem.topic.toUpperCase()} · GRADE {problem.grade} ]
+          [ {problem.topic.toUpperCase()} · JAAR {problem.grade} ]
         </span>
         {problem.question}
       </div>
@@ -149,10 +149,10 @@ export default function PracticeScreen() {
           value={answer}
           onChange={e => setAnswer(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && submitAnswer()}
-          aria-label="Your answer"
+          aria-label="Jouw antwoord"
         />
-        <button style={styles.btnPrimary} onClick={submitAnswer}>Check</button>
-        <button style={styles.btn} onClick={skipProblem}>Skip →</button>
+        <button style={styles.btnPrimary} onClick={submitAnswer}>Controleer</button>
+        <button style={styles.btn} onClick={skipProblem}>Overslaan →</button>
       </div>
 
       <div style={styles.feedbackArea}>
@@ -163,7 +163,7 @@ export default function PracticeScreen() {
             </span>
             {feedback.hint && (
               <span style={{ display: 'block', marginTop: '4px', color: '#555' }}>
-                Hint: {feedback.hint}
+                Tip: {feedback.hint}
               </span>
             )}
           </>

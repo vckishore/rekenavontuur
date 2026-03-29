@@ -16,7 +16,7 @@ export default function StoryBanner({ story }) {
         display: 'block',
         marginBottom: '6px',
       }}>
-        [ STORY CONTEXT ]
+        [ VERHAALTJE ]
       </span>
       {story}
     </div>

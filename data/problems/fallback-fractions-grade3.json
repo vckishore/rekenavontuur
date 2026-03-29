@@ -1,110 +1,110 @@
 [
   {
     "id": "fallback-frac-g3-001",
-    "topic": "fractions",
+    "topic": "breuken",
     "grade": 3,
-    "story": "You are sharing a pizza at a party.",
-    "question": "A pizza is cut into 4 equal slices. You eat 1 slice. What fraction of the pizza did you eat? Enter the numerator only (denominator is 4).",
+    "story": "Je deelt een pizza op een feestje.",
+    "question": "Een pizza wordt in 4 gelijke stukken gesneden. Je eet 1 stuk. Welk deel van de pizza heb je gegeten? Geef alleen de teller in (de noemer is 4).",
     "answer": 1,
-    "hint": "1 out of 4 equal pieces is 1/4. The numerator is 1."
+    "hint": "1 van 4 gelijke stukken is 1/4. De teller is 1."
   },
   {
     "id": "fallback-frac-g3-002",
-    "topic": "fractions",
+    "topic": "breuken",
     "grade": 3,
     "story": null,
-    "question": "A ribbon is 8 cm long. You cut it into equal parts of 2 cm each. How many parts do you get?",
+    "question": "Een lint is 8 cm lang. Je knipt het in stukjes van elk 2 cm. Hoeveel stukjes krijg je?",
     "answer": 4,
-    "hint": "Divide the total length by the size of each part: 8 ÷ 2 = 4"
+    "hint": "Deel de totale lengte door de grootte van elk stukje: 8 ÷ 2 = 4"
   },
   {
     "id": "fallback-frac-g3-003",
-    "topic": "fractions",
+    "topic": "breuken",
     "grade": 3,
-    "story": "You are dividing apples among friends.",
-    "question": "You have 6 apples and want to give each of 3 friends an equal share. How many apples does each friend get?",
+    "story": "Je deelt appels uit aan vrienden.",
+    "question": "Je hebt 6 appels en wil ze eerlijk verdelen over 3 vrienden. Hoeveel appels krijgt elke vriend?",
     "answer": 2,
-    "hint": "6 apples divided equally among 3 friends: 6 ÷ 3 = 2"
+    "hint": "6 appels gelijk verdeeld over 3 vrienden: 6 ÷ 3 = 2"
   },
   {
     "id": "fallback-frac-g3-004",
-    "topic": "fractions",
+    "topic": "breuken",
     "grade": 3,
     "story": null,
-    "question": "A bar of chocolate has 10 pieces. You eat half of it. How many pieces did you eat?",
+    "question": "Een reep chocolade heeft 10 stukjes. Je eet de helft op. Hoeveel stukjes heb je gegeten?",
     "answer": 5,
-    "hint": "Half means divide by 2: 10 ÷ 2 = 5"
+    "hint": "De helft betekent delen door 2: 10 ÷ 2 = 5"
   },
   {
     "id": "fallback-frac-g3-005",
-    "topic": "fractions",
+    "topic": "breuken",
     "grade": 3,
-    "story": "A farmer divides a field into equal sections.",
-    "question": "The field has 12 sections. The farmer plants wheat in one third of them. How many sections have wheat?",
+    "story": "Een boer verdeelt zijn veld in gelijke stukken.",
+    "question": "Het veld heeft 12 stukken. De boer plant tarwe in een derde van de stukken. Hoeveel stukken hebben tarwe?",
     "answer": 4,
-    "hint": "One third of 12: 12 ÷ 3 = 4"
+    "hint": "Een derde van 12: 12 ÷ 3 = 4"
   },
   {
     "id": "fallback-frac-g3-006",
-    "topic": "fractions",
+    "topic": "breuken",
     "grade": 3,
     "story": null,
-    "question": "A bag has 8 marbles. Three quarters of them are red. How many marbles are red?",
+    "question": "Een zak heeft 8 knikkers. Drie kwart ervan zijn rood. Hoeveel knikkers zijn rood?",
     "answer": 6,
-    "hint": "Three quarters of 8: first find one quarter (8 ÷ 4 = 2), then multiply by 3 (2 x 3 = 6)"
+    "hint": "Drie kwart van 8: zoek eerst een kwart (8 ÷ 4 = 2), vermenigvuldig dan met 3 (2 x 3 = 6)"
   },
   {
     "id": "fallback-frac-g3-007",
-    "topic": "fractions",
+    "topic": "breuken",
     "grade": 3,
-    "story": "You are slicing a loaf of bread.",
-    "question": "A loaf is cut into 6 equal slices. You eat 2 slices. How many slices are left?",
+    "story": "Je snijdt een brood in sneden.",
+    "question": "Een brood wordt in 6 gelijke sneden gesneden. Je eet er 2 op. Hoeveel sneden zijn er nog over?",
     "answer": 4,
-    "hint": "Start with 6 slices, subtract the 2 you ate: 6 - 2 = 4"
+    "hint": "Begin met 6 sneden, trek de 2 die je gegeten hebt af: 6 - 2 = 4"
   },
   {
     "id": "fallback-frac-g3-008",
-    "topic": "fractions",
+    "topic": "breuken",
     "grade": 3,
     "story": null,
-    "question": "A jug holds 10 cups of juice. You pour out half of it. How many cups are left?",
+    "question": "Een kan heeft 10 bekers limonade. Je schenkt de helft in. Hoeveel bekers zijn er nog over?",
     "answer": 5,
-    "hint": "Half of 10: 10 ÷ 2 = 5"
+    "hint": "De helft van 10: 10 ÷ 2 = 5"
   },
   {
     "id": "fallback-frac-g3-009",
-    "topic": "fractions",
+    "topic": "breuken",
     "grade": 3,
-    "story": "A class is decorating the school hall.",
-    "question": "There are 15 students. One third of them are making banners. How many students are making banners?",
+    "story": "Een klas versiert de school voor een feest.",
+    "question": "Er zijn 15 leerlingen. Een derde van hen maakt versieringen. Hoeveel leerlingen maken versieringen?",
     "answer": 5,
-    "hint": "One third of 15: 15 ÷ 3 = 5"
+    "hint": "Een derde van 15: 15 ÷ 3 = 5"
   },
   {
     "id": "fallback-frac-g3-010",
-    "topic": "fractions",
+    "topic": "breuken",
     "grade": 3,
     "story": null,
-    "question": "A cake is cut into 8 equal pieces. 2 pieces are eaten. How many pieces remain?",
+    "question": "Een taart wordt in 8 gelijke stukken gesneden. Er worden 2 stukken opgegeten. Hoeveel stukken zijn er nog?",
     "answer": 6,
-    "hint": "8 total pieces minus 2 eaten: 8 - 2 = 6"
+    "hint": "8 stukken min 2 opgegeten: 8 - 2 = 6"
   },
   {
     "id": "fallback-frac-g3-011",
-    "topic": "fractions",
+    "topic": "breuken",
     "grade": 3,
-    "story": "You are sharing stickers with your brother.",
-    "question": "You have 20 stickers and give your brother half. How many do you keep?",
+    "story": "Je deelt stickers met je broer of zus.",
+    "question": "Je hebt 20 stickers en geeft de helft aan je broer of zus. Hoeveel houd je zelf?",
     "answer": 10,
-    "hint": "Half of 20: 20 ÷ 2 = 10"
+    "hint": "De helft van 20: 20 ÷ 2 = 10"
   },
   {
     "id": "fallback-frac-g3-012",
-    "topic": "fractions",
+    "topic": "breuken",
     "grade": 3,
     "story": null,
-    "question": "A box has 16 crayons. One quarter are broken. How many crayons are broken?",
+    "question": "Een doos heeft 16 kleurpotloden. Een kwart ervan is gebroken. Hoeveel kleurpotloden zijn gebroken?",
     "answer": 4,
-    "hint": "One quarter of 16: 16 ÷ 4 = 4"
+    "hint": "Een kwart van 16: 16 ÷ 4 = 4"
   }
 ]
