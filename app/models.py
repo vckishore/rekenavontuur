@@ -1,5 +1,10 @@
-from pydantic import BaseModel
+import re
+
+from pydantic import BaseModel, field_validator
 from typing import Optional, List
+
+VALID_TOPICS = {"vermenigvuldigen", "breuken", "vraagstukken", "optellen", "aftrekken", "delen"}
+VALID_GRADES = set(range(1, 7))
 
 
 class Problem(BaseModel):
@@ -17,6 +22,22 @@ class StartSessionRequest(BaseModel):
     grade: int
     count: int = 5
 
+    @field_validator("topic")
+    @classmethod
+    def topic_must_be_safe(cls, v: str) -> str:
+        if not re.fullmatch(r"[a-z_]+", v):
+            raise ValueError("Ongeldig onderwerp")
+        if v not in VALID_TOPICS:
+            raise ValueError(f"Onbekend onderwerp: {v}")
+        return v
+
+    @field_validator("grade")
+    @classmethod
+    def grade_must_be_valid(cls, v: int) -> int:
+        if v not in VALID_GRADES:
+            raise ValueError(f"Ongeldig leerjaar: {v}")
+        return v
+
 
 class StartSessionResponse(BaseModel):
     session_id: int
@@ -28,9 +49,24 @@ class SubmitAnswerRequest(BaseModel):
     problem_id: str
     topic: str
     grade: int
-    question_text: str
     user_answer: str
     attempt_number: int = 1
+
+    @field_validator("topic")
+    @classmethod
+    def topic_must_be_safe(cls, v: str) -> str:
+        if not re.fullmatch(r"[a-z_]+", v):
+            raise ValueError("Ongeldig onderwerp")
+        if v not in VALID_TOPICS:
+            raise ValueError(f"Onbekend onderwerp: {v}")
+        return v
+
+    @field_validator("grade")
+    @classmethod
+    def grade_must_be_valid(cls, v: int) -> int:
+        if v not in VALID_GRADES:
+            raise ValueError(f"Ongeldig leerjaar: {v}")
+        return v
 
 
 class SubmitAnswerResponse(BaseModel):
