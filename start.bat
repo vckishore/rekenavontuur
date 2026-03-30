@@ -1,9 +1,9 @@
 @echo off
 echo Starting Rekenavontuur...
 
-start "Backend" cmd /k "cd /d %~dp0 && uvicorn app.main:app --reload"
+start "Backend" cmd /k "cd /d %~dp0 && python -m uvicorn app.main:app --reload"
 
-timeout /t 3 /nobreak > /dev/null
+timeout /t 3 /nobreak > nul
 
 start "Frontend" cmd /k "cd /d %~dp0frontend && npm run dev -- --host"
 
