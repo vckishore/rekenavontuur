@@ -16,6 +16,7 @@ export default function PracticeScreen() {
   const [done, setDone] = useState(false)
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
   const attemptRef = useRef(1)
   const navigate = useNavigate()
 
@@ -54,55 +55,73 @@ export default function PracticeScreen() {
   }
 
   async function submitAnswer() {
-    if (!answer.trim() || !problems[current]) return
+    if (!answer.trim() || !problems[current] || submitting) return
     const problem = problems[current]
-    const res = await fetch('/api/answers', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        session_id: sessionId,
-        problem_id: problem.id,
-        topic: problem.topic,
-        grade: problem.grade,
-        question_text: problem.question,
-        user_answer: answer.trim(),
-        attempt_number: attemptRef.current,
-      }),
-    })
-    const data = await res.json()
-
-    if (data.error) {
-      setFeedback({ type: 'error', message: data.error })
-      return
-    }
-
-    if (data.correct) {
-      const next = completed + 1
-      setCompleted(next)
-      setFeedback({ type: 'correct', message: 'Juist!' })
-      attemptRef.current = 1
-      if (next >= problems.length) {
-        setTimeout(() => setDone(true), 800)
-      } else {
-        setTimeout(() => {
-          setCurrent(c => c + 1)
-          setAnswer('')
-          setFeedback(null)
-        }, 800)
+    setSubmitting(true)
+    try {
+      const res = await fetch('/api/answers', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          session_id: sessionId,
+          problem_id: problem.id,
+          topic: problem.topic,
+          grade: problem.grade,
+          user_answer: answer.trim(),
+          attempt_number: attemptRef.current,
+        }),
+      })
+      if (!res.ok) {
+        setFeedback({ type: 'error', message: 'Er ging iets mis. Probeer het opnieuw.' })
+        return
       }
-    } else {
-      attemptRef.current += 1
-      setFeedback({ type: 'wrong', message: 'Niet helemaal.', hint: data.hint })
+      const data = await res.json()
+
+      if (data.error) {
+        setFeedback({ type: 'error', message: data.error })
+        return
+      }
+
+      if (data.correct) {
+        const next = completed + 1
+        setCompleted(next)
+        setFeedback({ type: 'correct', message: 'Juist!' })
+        attemptRef.current = 1
+        if (next >= problems.length) {
+          setTimeout(() => setDone(true), 800)
+        } else {
+          setTimeout(() => {
+            setCurrent(c => c + 1)
+            setAnswer('')
+            setFeedback(null)
+          }, 800)
+        }
+      } else {
+        attemptRef.current += 1
+        setFeedback({ type: 'wrong', message: 'Niet helemaal.', hint: data.hint })
+      }
+    } catch {
+      setFeedback({ type: 'error', message: 'Er ging iets mis. Probeer het opnieuw.' })
+    } finally {
+      setSubmitting(false)
     }
   }
 
   function skipProblem() {
-    if (current < problems.length - 1) {
-      setCurrent(c => c + 1)
-      setAnswer('')
-      setFeedback(null)
-      attemptRef.current = 1
+    if (problems.length === 0) return
+    // Rotate current problem to end of queue so it can be retried
+    const updated = [...problems]
+    const [skipped] = updated.splice(current, 1)
+    updated.push(skipped)
+    setProblems(updated)
+    // current index stays the same (next problem slides into position)
+    // unless we were at the last position after splice
+    if (current >= updated.length) {
+      setCurrent(updated.length - 1)
     }
+    setAnswer('')
+    setFeedback(null)
+    attemptRef.current = 1
   }
 
   if (loading) return <div style={styles.center}>Opgaven laden...</div>
@@ -114,7 +133,7 @@ export default function PracticeScreen() {
   )
   if (done) return (
     <div style={styles.center}>
-      <h2 style={{ fontFamily: 'monospace', marginBottom: '16px' }}>Oefensessie voltooid!</h2>
+      <h2 style={{ fontFamily: 'Georgia, serif', marginBottom: '16px' }}>Oefensessie voltooid!</h2>
       <div style={{ display: 'flex', gap: '8px' }}>
         <button style={styles.btnPrimary} onClick={startSession}>Nog een keer</button>
         <button style={styles.btn} onClick={() => navigate('/dashboard')}>
@@ -148,11 +167,16 @@ export default function PracticeScreen() {
           placeholder="?"
           value={answer}
           onChange={e => setAnswer(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && submitAnswer()}
+          onKeyDown={e => e.key === 'Enter' && !submitting && submitAnswer()}
           aria-label="Jouw antwoord"
+          disabled={submitting}
         />
-        <button style={styles.btnPrimary} onClick={submitAnswer}>Controleer</button>
-        <button style={styles.btn} onClick={skipProblem}>Overslaan →</button>
+        <button style={styles.btnPrimary} onClick={submitAnswer} disabled={submitting}>
+          {submitting ? '...' : 'Controleer'}
+        </button>
+        <button style={styles.btn} onClick={skipProblem} disabled={submitting}>
+          Sla over
+        </button>
       </div>
 
       <div style={styles.feedbackArea}>
