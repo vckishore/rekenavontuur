@@ -4,7 +4,6 @@ import os
 DB_PATH = os.environ.get("MATH_DB_PATH", "math.db")
 
 MIGRATIONS = [
-    "CREATE TABLE IF NOT EXISTS schema_version (version INTEGER PRIMARY KEY)",
     """CREATE TABLE IF NOT EXISTS sessions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         started_at DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -28,7 +27,6 @@ async def get_db():
     db = await aiosqlite.connect(DB_PATH)
     db.row_factory = aiosqlite.Row
     await db.execute("PRAGMA foreign_keys = ON")
-    await init_db(db)
     return db
 
 

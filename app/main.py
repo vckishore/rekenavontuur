@@ -16,6 +16,7 @@ from .models import (
     StartSessionRequest, StartSessionResponse,
     SubmitAnswerRequest, SubmitAnswerResponse,
     DashboardResponse, TopicStats, AdminStatusResponse, Problem,
+    VALID_TOPICS,
 )
 from . import codex_pipeline
 
@@ -44,8 +45,8 @@ async def start_session(req: StartSessionRequest):
         raise HTTPException(
             status_code=503,
             detail=(
-                f"No problems available for topic={req.topic} grade={req.grade}. "
-                "Check /api/admin/status for pool health."
+                f"Geen opgaven beschikbaar voor onderwerp={req.topic} leerjaar={req.grade}. "
+                "Controleer /api/admin/status voor de poolstatus."
             ),
         )
     count = codex_pipeline.pool_count(req.topic, req.grade)
@@ -65,7 +66,7 @@ async def start_session(req: StartSessionRequest):
         session_id = cursor.lastrowid
         await db.commit()
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Database error: {e}")
+        raise HTTPException(status_code=500, detail=f"Databasefout: {e}")
     finally:
         await db.close()
 
@@ -88,7 +89,7 @@ async def submit_answer(req: SubmitAnswerRequest):
     problems = codex_pipeline.load_problems(req.topic, req.grade)
     problem = next((p for p in problems if p["id"] == req.problem_id), None)
     if problem is None:
-        raise HTTPException(status_code=404, detail="Problem not found")
+        raise HTTPException(status_code=404, detail="Opgave niet gevonden")
 
     correct = user_int == problem["answer"]
 
@@ -101,13 +102,14 @@ async def submit_answer(req: SubmitAnswerRequest):
                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
             (
                 req.session_id, req.problem_id, req.topic, req.grade,
-                req.question_text, req.user_answer, int(correct),
+                problem["question"],  # server-authoritative, not from client
+                req.user_answer, int(correct),
                 req.attempt_number, datetime.utcnow().isoformat(),
             ),
         )
         await db.commit()
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to record answer: {e}")
+        raise HTTPException(status_code=500, detail=f"Antwoord opslaan mislukt: {e}")
     finally:
         await db.close()
 
@@ -148,9 +150,10 @@ async def get_dashboard():
     finally:
         await db.close()
 
+    # Check pool health for all known topics at grade 3
     low_pool = any(
-        codex_pipeline.pool_count(t.topic, t.grade if hasattr(t, 'grade') else 3) < 5
-        for t in by_topic
+        codex_pipeline.pool_count(topic, 3) < 5
+        for topic in VALID_TOPICS
     )
 
     return DashboardResponse(
@@ -178,13 +181,13 @@ async def export_csv():
     output = io.StringIO()
     writer = csv.writer(output)
     writer.writerow(
-        ["date", "topic", "grade", "question", "answer", "correct", "attempt"]
+        ["datum", "onderwerp", "leerjaar", "vraag", "antwoord", "correct", "poging"]
     )
     for row in rows or []:
         writer.writerow([
             row["answered_at"], row["topic"], row["grade"],
             row["question_text"], row["user_answer"],
-            "yes" if row["correct"] else "no",
+            "ja" if row["correct"] else "nee",
             row["attempt_number"],
         ])
 
@@ -193,7 +196,7 @@ async def export_csv():
         iter([output.getvalue()]),
         media_type="text/csv",
         headers={
-            "Content-Disposition": "attachment; filename=math-adventure-progress.csv"
+            "Content-Disposition": "attachment; filename=rekenavontuur-voortgang.csv"
         },
     )
 
