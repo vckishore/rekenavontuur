@@ -17,6 +17,7 @@ export default function PracticeScreen() {
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [cardState, setCardState] = useState(null) // 'correct' | 'wrong' | null
   const attemptRef = useRef(1)
   const navigate = useNavigate()
 
@@ -46,6 +47,7 @@ export default function PracticeScreen() {
       setDone(false)
       setFeedback(null)
       setAnswer('')
+      setCardState(null)
       attemptRef.current = 1
     } catch {
       setError('Kon geen verbinding maken met de server.')
@@ -85,20 +87,25 @@ export default function PracticeScreen() {
       if (data.correct) {
         const next = completed + 1
         setCompleted(next)
-        setFeedback({ type: 'correct', message: 'Juist!' })
+        setCardState('correct')
+        setFeedback({ type: 'correct', message: 'Juist! Goed gedaan!' })
         attemptRef.current = 1
         if (next >= problems.length) {
-          setTimeout(() => setDone(true), 800)
+          setTimeout(() => setDone(true), 900)
         } else {
           setTimeout(() => {
             setCurrent(c => c + 1)
             setAnswer('')
             setFeedback(null)
-          }, 800)
+            setCardState(null)
+          }, 900)
         }
       } else {
         attemptRef.current += 1
+        setCardState('wrong')
         setFeedback({ type: 'wrong', message: 'Niet helemaal.', hint: data.hint })
+        // reset shake after animation
+        setTimeout(() => setCardState(null), 400)
       }
     } catch {
       setFeedback({ type: 'error', message: 'Er ging iets mis. Probeer het opnieuw.' })
@@ -109,53 +116,54 @@ export default function PracticeScreen() {
 
   function skipProblem() {
     if (problems.length === 0) return
-    // Rotate current problem to end of queue so it can be retried
     const updated = [...problems]
     const [skipped] = updated.splice(current, 1)
     updated.push(skipped)
     setProblems(updated)
-    // current index stays the same (next problem slides into position)
-    // unless we were at the last position after splice
     if (current >= updated.length) {
       setCurrent(updated.length - 1)
     }
     setAnswer('')
     setFeedback(null)
+    setCardState(null)
     attemptRef.current = 1
   }
 
-  if (loading) return <div style={styles.center}>Opgaven laden...</div>
+  if (loading) return (
+    <div style={styles.center}>
+      <div style={styles.loadingText}>Opgaven laden...</div>
+    </div>
+  )
+
   if (error) return (
     <div style={styles.center}>
-      <p style={{ color: '#c00', marginBottom: '12px' }}>{error}</p>
-      <button style={styles.btn} onClick={startSession}>Opnieuw proberen</button>
+      <p style={styles.errorMsg}>{error}</p>
+      <button style={styles.btnPrimary} onClick={startSession}>Opnieuw proberen</button>
     </div>
   )
-  if (done) return (
-    <div style={styles.center}>
-      <h2 style={{ fontFamily: 'Georgia, serif', marginBottom: '16px' }}>Oefensessie voltooid!</h2>
-      <div style={{ display: 'flex', gap: '8px' }}>
-        <button style={styles.btnPrimary} onClick={startSession}>Nog een keer</button>
-        <button style={styles.btn} onClick={() => navigate('/dashboard')}>
-          Bekijk resultaten
-        </button>
-      </div>
-    </div>
-  )
+
+  if (done) return <DoneScreen onRetry={startSession} onDashboard={() => navigate('/dashboard')} count={problems.length} />
+
   if (!problems.length) return null
 
   const problem = problems[current]
+
+  const cardStyle = {
+    ...styles.problemCard,
+    ...(cardState === 'correct' ? styles.cardCorrect : {}),
+    ...(cardState === 'wrong'   ? styles.cardWrong   : {}),
+  }
 
   return (
     <div style={styles.screen}>
       <StoryBanner story={problem.story} />
       <ProgressDots total={problems.length} completed={completed} />
 
-      <div style={styles.problemBox}>
+      <div style={cardStyle} className={cardState === 'wrong' ? 'shake' : ''}>
         <span style={styles.problemTag}>
-          [ {problem.topic.toUpperCase()} · JAAR {problem.grade} ]
+          {problem.topic.toUpperCase()} · JAAR {problem.grade}
         </span>
-        {problem.question}
+        <div style={styles.problemText}>{problem.question}</div>
       </div>
 
       <div style={styles.answerRow}>
@@ -174,96 +182,230 @@ export default function PracticeScreen() {
         <button style={styles.btnPrimary} onClick={submitAnswer} disabled={submitting}>
           {submitting ? '...' : 'Controleer'}
         </button>
-        <button style={styles.btn} onClick={skipProblem} disabled={submitting}>
+        <button style={styles.btnGhost} onClick={skipProblem} disabled={submitting}>
           Sla over
         </button>
       </div>
 
-      <div style={styles.feedbackArea}>
-        {feedback ? (
+      <div style={{
+        ...styles.feedbackArea,
+        ...(feedback?.type === 'correct' ? styles.feedbackCorrect : {}),
+        ...(feedback?.type === 'wrong'   ? styles.feedbackWrong   : {}),
+        ...(feedback?.type === 'error'   ? styles.feedbackWrong   : {}),
+        opacity: feedback ? 1 : 0,
+      }}>
+        {feedback && (
           <>
-            <span style={{ color: feedback.type === 'correct' ? '#060' : '#900' }}>
-              {feedback.message}
-            </span>
+            {feedback.message}
             {feedback.hint && (
-              <span style={{ display: 'block', marginTop: '4px', color: '#555' }}>
-                Tip: {feedback.hint}
-              </span>
+              <span style={styles.hint}>Tip: {feedback.hint}</span>
             )}
           </>
-        ) : null}
+        )}
       </div>
+
+      <style>{`
+        @keyframes shake {
+          0%,100% { transform: translateX(0); }
+          20%     { transform: translateX(-8px); }
+          40%     { transform: translateX(8px); }
+          60%     { transform: translateX(-5px); }
+          80%     { transform: translateX(5px); }
+        }
+        .shake { animation: shake 0.35s ease-in-out; }
+      `}</style>
+    </div>
+  )
+}
+
+function DoneScreen({ onRetry, onDashboard, count }) {
+  return (
+    <div style={styles.center}>
+      <div style={styles.doneCard}>
+        <div style={styles.doneEmoji}>⭐</div>
+        <h2 style={styles.doneTitle}>Sessie voltooid!</h2>
+        <p style={styles.doneSub}>{count} van {count} opgaven goed — geweldig!</p>
+        <div style={styles.doneActions}>
+          <button style={styles.btnPrimary} onClick={onRetry}>Nog een keer</button>
+          <button style={styles.btnGhost} onClick={onDashboard}>Bekijk resultaten</button>
+        </div>
+      </div>
+      <style>{`
+        @keyframes pop {
+          0%   { transform: scale(0); opacity: 0; }
+          60%  { transform: scale(1.2); }
+          100% { transform: scale(1); opacity: 1; }
+        }
+        .done-emoji { animation: pop 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+      `}</style>
     </div>
   )
 }
 
 const styles = {
   screen: {
-    maxWidth: '520px',
+    maxWidth: '540px',
     margin: '40px auto',
     padding: '24px',
-    fontFamily: 'Georgia, serif',
+    fontFamily: 'var(--font-body)',
   },
   center: {
-    maxWidth: '520px',
+    maxWidth: '540px',
     margin: '80px auto',
     padding: '24px',
     textAlign: 'center',
-    fontFamily: 'Georgia, serif',
+    fontFamily: 'var(--font-body)',
   },
-  problemBox: {
-    border: '2px solid #333',
-    padding: '16px',
+  loadingText: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '13px',
+    color: 'var(--muted)',
+  },
+  errorMsg: {
+    color: 'var(--wrong)',
+    fontWeight: 600,
     marginBottom: '16px',
-    fontSize: '16px',
-    lineHeight: 1.6,
+  },
+  problemCard: {
+    background: 'var(--surface)',
+    border: '3px solid var(--border-strong)',
+    borderRadius: '14px',
+    padding: '20px',
+    marginBottom: '14px',
+    boxShadow: 'var(--shadow-md)',
+    transition: 'border-color 0.2s, box-shadow 0.2s',
+  },
+  cardCorrect: {
+    borderColor: 'var(--correct)',
+    boxShadow: '0 0 0 4px var(--correct-tint), var(--shadow-md)',
+  },
+  cardWrong: {
+    borderColor: 'var(--wrong)',
+    boxShadow: '0 0 0 4px var(--wrong-tint), var(--shadow-md)',
   },
   problemTag: {
-    fontFamily: 'monospace',
+    display: 'inline-flex',
+    alignItems: 'center',
+    fontFamily: 'var(--font-mono)',
     fontSize: '10px',
-    color: '#aaa',
-    display: 'block',
-    marginBottom: '8px',
+    fontWeight: 700,
+    color: 'var(--primary-light)',
+    background: 'var(--primary-tint)',
+    borderRadius: '9999px',
+    padding: '3px 10px',
+    marginBottom: '10px',
+  },
+  problemText: {
+    fontFamily: 'var(--font-display)',
+    fontWeight: 700,
+    fontSize: '20px',
+    lineHeight: 1.45,
+    color: 'var(--text)',
   },
   answerRow: {
     display: 'flex',
     gap: '8px',
-    alignItems: 'center',
-    marginBottom: '12px',
+    alignItems: 'stretch',
+    marginBottom: '10px',
   },
   input: {
-    border: '1px solid #333',
-    padding: '8px 12px',
-    fontSize: '20px',
-    width: '120px',
-    fontFamily: 'monospace',
-    background: '#fff',
-  },
-  btn: {
-    border: '2px solid #333',
-    background: '#fff',
-    padding: '8px 16px',
-    minHeight: '44px',
-    fontSize: '13px',
-    fontFamily: 'Georgia, serif',
-    cursor: 'pointer',
+    width: '88px',
+    border: '3px solid var(--border-strong)',
+    borderRadius: '8px',
+    padding: '0 12px',
+    fontFamily: 'var(--font-mono)',
+    fontSize: '26px',
+    fontWeight: 700,
+    textAlign: 'center',
+    color: 'var(--text)',
+    background: 'var(--surface)',
+    height: '52px',
+    outline: 'none',
+    transition: 'border-color 0.15s, box-shadow 0.15s',
   },
   btnPrimary: {
-    border: '2px solid #333',
-    background: '#333',
+    flex: 1,
+    background: 'var(--primary-grad)',
     color: '#fff',
-    padding: '8px 16px',
-    minHeight: '44px',
-    fontSize: '13px',
-    fontFamily: 'Georgia, serif',
+    border: 'none',
+    borderRadius: '8px',
+    height: '52px',
+    fontSize: '14px',
+    fontFamily: 'var(--font-body)',
+    fontWeight: 700,
     cursor: 'pointer',
+    boxShadow: 'var(--shadow-btn)',
+    transition: 'filter 0.15s, transform 0.15s',
+  },
+  btnGhost: {
+    background: 'var(--surface)',
+    color: 'var(--primary-mid)',
+    border: '2px solid var(--border)',
+    borderRadius: '8px',
+    height: '52px',
+    padding: '0 16px',
+    fontSize: '14px',
+    fontFamily: 'var(--font-body)',
+    fontWeight: 700,
+    cursor: 'pointer',
+    whiteSpace: 'nowrap',
+    transition: 'background 0.15s, border-color 0.15s',
   },
   feedbackArea: {
-    border: '1px dashed #bbb',
-    padding: '10px',
-    fontFamily: 'monospace',
-    fontSize: '14px',
-    lineHeight: 1.5,
     minHeight: '44px',
+    borderRadius: '8px',
+    padding: '10px 14px',
+    fontFamily: 'var(--font-body)',
+    fontSize: '14px',
+    fontWeight: 700,
+    lineHeight: 1.5,
+    transition: 'opacity 0.2s',
+  },
+  feedbackCorrect: {
+    background: 'var(--correct-tint)',
+    color: 'var(--correct)',
+  },
+  feedbackWrong: {
+    background: 'var(--wrong-tint)',
+    color: 'var(--wrong)',
+  },
+  hint: {
+    display: 'block',
+    fontWeight: 500,
+    fontSize: '13px',
+    color: 'var(--muted)',
+    marginTop: '3px',
+  },
+  // Done screen
+  doneCard: {
+    background: 'var(--surface)',
+    border: '3px solid var(--primary-mid)',
+    borderRadius: '20px',
+    padding: '36px 28px',
+    boxShadow: 'var(--shadow-md)',
+  },
+  doneEmoji: {
+    fontSize: '52px',
+    marginBottom: '8px',
+    display: 'block',
+    animation: 'pop 0.5s cubic-bezier(0.34,1.56,0.64,1)',
+  },
+  doneTitle: {
+    fontFamily: 'var(--font-display)',
+    fontWeight: 800,
+    fontSize: '28px',
+    color: 'var(--primary)',
+    marginBottom: '6px',
+  },
+  doneSub: {
+    fontSize: '14px',
+    color: 'var(--muted)',
+    marginBottom: '24px',
+  },
+  doneActions: {
+    display: 'flex',
+    gap: '10px',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
   },
 }

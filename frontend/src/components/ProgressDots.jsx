@@ -1,26 +1,49 @@
 export default function ProgressDots({ total = 5, completed = 0 }) {
   return (
-    <div style={{ display: 'flex', gap: '6px', alignItems: 'center', marginBottom: '16px' }}>
-      <span style={{ fontFamily: 'monospace', fontSize: '11px', color: '#888' }}>
-        voortgang:
-      </span>
-      {Array.from({ length: total }, (_, i) => (
-        <span
-          key={i}
-          data-testid={i < completed ? 'dot-filled' : 'dot-empty'}
-          style={{
-            width: '16px',
-            height: '16px',
-            border: '1px solid #333',
-            borderRadius: '50%',
-            display: 'inline-block',
-            background: i < completed ? '#333' : 'transparent',
-          }}
-        />
-      ))}
-      <span style={{ fontFamily: 'monospace', fontSize: '11px', color: '#888', marginLeft: '4px' }}>
-        {completed} / {total}
-      </span>
+    <div style={styles.row}>
+      <div style={styles.dots}>
+        {Array.from({ length: total }, (_, i) => (
+          <span
+            key={i}
+            data-testid={i < completed ? 'dot-filled' : 'dot-empty'}
+            style={{
+              ...styles.dot,
+              background: i < completed ? 'var(--primary-mid)' : 'var(--primary-tint)',
+              borderColor: i < completed ? 'var(--primary-mid)' : 'var(--border-strong)',
+            }}
+          />
+        ))}
+      </div>
+      <span style={styles.label}>{completed}/{total}</span>
     </div>
   )
+}
+
+const styles = {
+  row: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    marginBottom: '18px',
+  },
+  dots: {
+    display: 'flex',
+    gap: '6px',
+    alignItems: 'center',
+  },
+  dot: {
+    width: '12px',
+    height: '12px',
+    borderRadius: '50%',
+    border: '2px solid',
+    display: 'inline-block',
+    transition: 'background 0.15s, border-color 0.15s',
+  },
+  label: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '11px',
+    fontWeight: 700,
+    color: 'var(--muted)',
+    marginLeft: 'auto',
+  },
 }
