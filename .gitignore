@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+*.db
+*.log
+venv/
+.env
+
+# Node
+node_modules/
+frontend/dist/
+
+# gstack / Claude Code tooling
+.claude/
+.gstack/
+
+# OS
+.DS_Store
+Thumbs.db
