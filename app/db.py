@@ -34,9 +34,10 @@ async def init_db(db):
     await db.execute(
         "CREATE TABLE IF NOT EXISTS schema_version (version INTEGER PRIMARY KEY)"
     )
-    row = await db.execute_fetchone(
+    cursor = await db.execute(
         "SELECT COALESCE(MAX(version), 0) FROM schema_version"
     )
+    row = await cursor.fetchone()
     current = row[0] if row else 0
     for i, migration in enumerate(MIGRATIONS[current:], start=current + 1):
         await db.execute(migration)

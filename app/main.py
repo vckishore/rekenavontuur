@@ -11,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
-from .db import get_db, init_db
+from .db import get_db, init_db, DB_PATH
 from .models import (
     StartSessionRequest, StartSessionResponse,
     SubmitAnswerRequest, SubmitAnswerResponse,
@@ -32,7 +32,7 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup():
-    async with aiosqlite.connect("math.db") as db:
+    async with aiosqlite.connect(DB_PATH) as db:
         db.row_factory = aiosqlite.Row
         await db.execute("PRAGMA foreign_keys = ON")
         await init_db(db)
@@ -123,19 +123,22 @@ async def submit_answer(req: SubmitAnswerRequest):
 async def get_dashboard():
     db = await get_db()
     try:
-        total_row = await db.execute_fetchone(
+        cur1 = await db.execute(
             "SELECT COUNT(*), COALESCE(AVG(correct) * 100, 0) FROM answers"
         )
+        total_row = await cur1.fetchone()
         total_problems = total_row[0] if total_row else 0
         correct_rate = round(float(total_row[1]), 1) if total_row else 0.0
 
-        sessions_row = await db.execute_fetchone("SELECT COUNT(*) FROM sessions")
+        cur2 = await db.execute("SELECT COUNT(*) FROM sessions")
+        sessions_row = await cur2.fetchone()
         total_sessions = sessions_row[0] if sessions_row else 0
 
-        topic_rows = await db.execute_fetchall(
+        cur3 = await db.execute(
             """SELECT topic, COUNT(*) as attempted, SUM(correct) as correct_count
                FROM answers GROUP BY topic"""
         )
+        topic_rows = await cur3.fetchall()
         by_topic = [
             TopicStats(
                 topic=row["topic"],
@@ -170,11 +173,12 @@ async def get_dashboard():
 async def export_csv():
     db = await get_db()
     try:
-        rows = await db.execute_fetchall(
+        cur = await db.execute(
             """SELECT answered_at, topic, grade, question_text,
                       user_answer, correct, attempt_number
                FROM answers ORDER BY answered_at"""
         )
+        rows = await cur.fetchall()
     finally:
         await db.close()
 

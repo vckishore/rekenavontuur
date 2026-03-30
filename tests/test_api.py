@@ -2,51 +2,61 @@
 Backend API tests.
 Run: pytest tests/ -v
 """
-import json
 import pytest
 import pytest_asyncio
-from pathlib import Path
+import aiosqlite
 from httpx import AsyncClient, ASGITransport
 
-# Point DB to a temp file during tests
-import os
-os.environ["MATH_DB_PATH"] = ":memory:"
-
-from app.main import app
 from app import codex_pipeline
 
 
 SAMPLE_PROBLEMS = [
     {
-        "id": f"test-mult-g3-{i:03d}",
-        "topic": "multiplication",
+        "id": f"vermenigvuldigen-g3-{i:03d}",
+        "topic": "vermenigvuldigen",
         "grade": 3,
         "story": None,
-        "question": f"What is 3 x {i}?",
+        "question": f"Hoeveel is 3 x {i}?",
         "answer": 3 * i,
-        "hint": f"Count 3 groups of {i}",
+        "hint": f"Tel 3 groepjes van {i}",
     }
     for i in range(1, 16)
 ]
 
 
 @pytest.fixture(autouse=True)
-def patch_problems(monkeypatch, tmp_path):
+def patch_problems(monkeypatch):
     """Serve sample problems without hitting disk."""
     monkeypatch.setattr(codex_pipeline, "load_problems", lambda t, g: SAMPLE_PROBLEMS)
     monkeypatch.setattr(codex_pipeline, "pool_count", lambda t, g: len(SAMPLE_PROBLEMS))
 
 
 @pytest_asyncio.fixture
-async def client():
-    transport = ASGITransport(app=app)
+async def client(tmp_path, monkeypatch):
+    """Each test gets its own temp DB file so connections share the same tables."""
+    db_file = str(tmp_path / "test.db")
+    monkeypatch.setenv("MATH_DB_PATH", db_file)
+
+    # Patch DB_PATH in both db and main modules before the app starts
+    import app.db as db_mod
+    import app.main as main_mod
+    monkeypatch.setattr(db_mod, "DB_PATH", db_file)
+    monkeypatch.setattr(main_mod, "DB_PATH", db_file)
+
+    # Init the schema on our file-based DB
+    async with aiosqlite.connect(db_file) as db:
+        db.row_factory = aiosqlite.Row
+        await db.execute("PRAGMA foreign_keys = ON")
+        await db_mod.init_db(db)
+
+    transport = ASGITransport(app=main_mod.app)
     async with AsyncClient(transport=transport, base_url="http://test") as c:
         yield c
 
 
 @pytest.mark.asyncio
 async def test_start_session_returns_problems(client):
-    res = await client.post("/api/sessions", json={"topic": "multiplication", "grade": 3})
+    res = await client.post("/api/sessions", json={"topic": "vermenigvuldigen", "grade": 3})
     assert res.status_code == 200
     data = res.json()
     assert "session_id" in data
@@ -56,23 +66,29 @@ async def test_start_session_returns_problems(client):
 @pytest.mark.asyncio
 async def test_start_session_empty_pool(client, monkeypatch):
     monkeypatch.setattr(codex_pipeline, "load_problems", lambda t, g: [])
-    res = await client.post("/api/sessions", json={"topic": "multiplication", "grade": 3})
+    res = await client.post("/api/sessions", json={"topic": "vermenigvuldigen", "grade": 3})
     assert res.status_code == 503
+
+
+@pytest.mark.asyncio
+async def test_start_session_invalid_topic_rejected(client):
+    """Path traversal / invalid topic must be blocked with 422."""
+    res = await client.post("/api/sessions", json={"topic": "../../etc/passwd", "grade": 3})
+    assert res.status_code == 422
 
 
 @pytest.mark.asyncio
 async def test_submit_correct_answer(client):
     sess = await client.post(
-        "/api/sessions", json={"topic": "multiplication", "grade": 3}
+        "/api/sessions", json={"topic": "vermenigvuldigen", "grade": 3}
     )
     data = sess.json()
     problem = data["problems"][0]
     res = await client.post("/api/answers", json={
         "session_id": data["session_id"],
         "problem_id": problem["id"],
-        "topic": "multiplication",
+        "topic": "vermenigvuldigen",
         "grade": 3,
-        "question_text": problem["question"],
         "user_answer": str(problem["answer"]),
         "attempt_number": 1,
     })
@@ -84,16 +100,15 @@ async def test_submit_correct_answer(client):
 @pytest.mark.asyncio
 async def test_submit_wrong_answer_returns_hint(client):
     sess = await client.post(
-        "/api/sessions", json={"topic": "multiplication", "grade": 3}
+        "/api/sessions", json={"topic": "vermenigvuldigen", "grade": 3}
     )
     data = sess.json()
     problem = data["problems"][0]
     res = await client.post("/api/answers", json={
         "session_id": data["session_id"],
         "problem_id": problem["id"],
-        "topic": "multiplication",
+        "topic": "vermenigvuldigen",
         "grade": 3,
-        "question_text": problem["question"],
         "user_answer": "9999",
         "attempt_number": 1,
     })
@@ -104,21 +119,20 @@ async def test_submit_wrong_answer_returns_hint(client):
 @pytest.mark.asyncio
 async def test_submit_non_integer_answer(client):
     sess = await client.post(
-        "/api/sessions", json={"topic": "multiplication", "grade": 3}
+        "/api/sessions", json={"topic": "vermenigvuldigen", "grade": 3}
     )
     data = sess.json()
     problem = data["problems"][0]
     res = await client.post("/api/answers", json={
         "session_id": data["session_id"],
         "problem_id": problem["id"],
-        "topic": "multiplication",
+        "topic": "vermenigvuldigen",
         "grade": 3,
-        "question_text": problem["question"],
         "user_answer": "abc",
         "attempt_number": 1,
     })
     assert res.json()["correct"] is False
-    assert "whole number" in res.json()["error"].lower()
+    assert "getal" in res.json()["error"].lower()
 
 
 @pytest.mark.asyncio
@@ -135,4 +149,4 @@ async def test_dashboard_empty_db(client):
 async def test_export_csv_empty_db(client):
     res = await client.get("/api/export/csv")
     assert res.status_code == 200
-    assert "date,topic" in res.text
+    assert "datum,onderwerp" in res.text
