@@ -86,6 +86,7 @@ class DashboardResponse(BaseModel):
     total_problems: int
     correct_rate: float
     total_sessions: int
+    streak_days: int
     by_topic: List[TopicStats]
     low_pool_warning: bool
     last_generation_error: Optional[str] = None

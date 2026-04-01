@@ -2,7 +2,7 @@ import asyncio
 import csv
 import io
 import random
-from datetime import datetime
+from datetime import datetime, date, timedelta
 from pathlib import Path
 
 import aiosqlite
@@ -150,6 +150,26 @@ async def get_dashboard():
             )
             for row in (topic_rows or [])
         ]
+
+        cur4 = await db.execute(
+            "SELECT DISTINCT date(answered_at) as day FROM answers ORDER BY day DESC"
+        )
+        day_rows = await cur4.fetchall()
+        streak_days = 0
+        if day_rows:
+            days = [row[0] for row in day_rows]
+            today = date.today()
+            yesterday = today - timedelta(days=1)
+            most_recent = date.fromisoformat(days[0])
+            if most_recent >= yesterday:
+                streak_days = 1
+                for i in range(1, len(days)):
+                    prev = date.fromisoformat(days[i - 1])
+                    curr = date.fromisoformat(days[i])
+                    if (prev - curr).days == 1:
+                        streak_days += 1
+                    else:
+                        break
     finally:
         await db.close()
 
@@ -163,6 +183,7 @@ async def get_dashboard():
         total_problems=total_problems,
         correct_rate=correct_rate,
         total_sessions=total_sessions,
+        streak_days=streak_days,
         by_topic=by_topic,
         low_pool_warning=low_pool,
         last_generation_error=codex_pipeline.get_last_error(),
